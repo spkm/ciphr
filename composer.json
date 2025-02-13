@@ -1,0 +1,49 @@
+{
+    "name": "spkm/ciphr",
+    "description": "Integrate with the ciphr HR system API using SaloonPHP",
+    "license": "MIT",
+    "keywords": [
+        "ciphr",
+        "api",
+        "HR",
+        "Laravel"
+    ],
+    "authors": [
+        {
+            "name": "Simon Mitchell",
+            "email": "hello@spkmitchell.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.3",
+        "saloonphp/cache-plugin": "^3.0",
+        "saloonphp/laravel-plugin": "^3.0",
+        "saloonphp/pagination-plugin": "^2.0",
+        "saloonphp/saloon": "^3.0",
+        "symfony/var-dumper": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "spkm\\ciphr\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "spkm\\ciphr\\CiphrServiceProvider"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spkm\\ciphr\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    }
+}
