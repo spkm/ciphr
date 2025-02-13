@@ -9,6 +9,20 @@ You can install this package via composer using:
 composer require spkm/ciphr
 ```
 
+### Usage
+```php
+use spkm\ciphr\CiphrConnector;
+use spkm\ciphr\Requests\GetAllPersonDetailsRequest;
+
+$connector = new CiphrConnector($yourCustomerPortal, $yourApiKey);
+$request = new GetAllPersonDetailsRequest();
+$paginator = $connector->paginate($request);
+
+foreach ($paginator as $response) {
+  $response->json();
+}
+```
+
 ### Security
 
 If you discover any security related issues, please email hello@spkmitchell.co.uk instead of using the issue tracker.
