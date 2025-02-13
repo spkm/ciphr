@@ -10,9 +10,10 @@ composer require spkm/ciphr
 ```
 
 ### Usage
+
 ```php
 use spkm\ciphr\CiphrConnector;
-use spkm\ciphr\Requests\GetAllPersonDetailsRequest;
+use spkm\ciphr\Requests\Person\GetAllPersonDetailsRequest;
 
 $connector = new CiphrConnector($yourCustomerPortal, $yourApiKey);
 $request = new GetAllPersonDetailsRequest();
