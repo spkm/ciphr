@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\Qualifications;
+namespace spkm\ciphr\Requests\Jobs;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllQualificationsRequest extends Request implements Paginatable
+class GetLeavingReasonsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -15,12 +15,12 @@ class GetAllQualificationsRequest extends Request implements Paginatable
 
     public function __construct(protected array $queryParameters = [])
     {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
+        $this->setPaginationSortKey('LeavingReasonID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return '/Qualification';
+        return '/LeavingReason';
     }
 
     public function defaultQuery(): array

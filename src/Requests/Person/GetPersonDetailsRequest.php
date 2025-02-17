@@ -7,7 +7,7 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllPersonDetailsRequest extends Request implements Paginatable
+class GetPersonDetailsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 

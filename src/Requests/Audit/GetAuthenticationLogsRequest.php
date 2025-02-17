@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\WorkPatterns;
+namespace spkm\ciphr\Requests\Audit;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllWorkPatternsRequest extends Request implements Paginatable
+class GetAuthenticationLogsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -15,12 +15,12 @@ class GetAllWorkPatternsRequest extends Request implements Paginatable
 
     public function __construct(protected array $queryParameters = [])
     {
-        $this->setPaginationSortKey('WorkPatternID', $this->queryParameters);
+        $this->setPaginationSortKey('ID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return '/WorkPattern';
+        return '/AuthenticationLog';
     }
 
     public function defaultQuery(): array

@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\Qualifications;
+namespace spkm\ciphr\Requests\OrganisationDetails;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllQualificationSubjectsRequest extends Request implements Paginatable
+class GetOrganisationDetailsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -15,12 +15,12 @@ class GetAllQualificationSubjectsRequest extends Request implements Paginatable
 
     public function __construct(protected array $queryParameters = [])
     {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
+        $this->setPaginationSortKey('OrganisationDetailID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return '/QualificationSubject';
+        return '/OrganisationDetails';
     }
 
     public function defaultQuery(): array

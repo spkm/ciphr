@@ -13,10 +13,10 @@ composer require spkm/ciphr
 
 ```php
 use spkm\ciphr\CiphrConnector;
-use spkm\ciphr\Requests\Person\GetAllPersonDetailsRequest;
+use spkm\ciphr\Requests\Person\GetPersonDetailsRequest;
 
 $connector = new CiphrConnector($yourCustomerPortal, $yourApiKey);
-$request = new GetAllPersonDetailsRequest();
+$request = new GetPersonDetailsRequest();
 $paginator = $connector->paginate($request);
 
 foreach ($paginator as $response) {

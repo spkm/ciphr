@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\Qualifications;
+namespace spkm\ciphr\Requests\Person;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllQualificationCategoriesRequest extends Request implements Paginatable
+class GetPersonPhotosRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -20,7 +20,7 @@ class GetAllQualificationCategoriesRequest extends Request implements Paginatabl
 
     public function resolveEndpoint(): string
     {
-        return '/QualificationCategory';
+        return '/PersonPhoto';
     }
 
     public function defaultQuery(): array

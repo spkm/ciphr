@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\WorkPatterns;
+namespace spkm\ciphr\Requests\Qualifications;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllWorkPatternShiftsRequest extends Request implements Paginatable
+class GetQualificationLevelsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -15,12 +15,12 @@ class GetAllWorkPatternShiftsRequest extends Request implements Paginatable
 
     public function __construct(protected array $queryParameters = [])
     {
-        $this->setPaginationSortKey('WorkPatternShiftID', $this->queryParameters);
+        $this->setPaginationSortKey('ID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return '/WorkPatternShift';
+        return '/QualificationLevel';
     }
 
     public function defaultQuery(): array

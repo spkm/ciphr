@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\Person;
+namespace spkm\ciphr\Requests\Absences;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllPersonPhotosRequest extends Request implements Paginatable
+class GetAbsenceSummariesRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -15,12 +15,12 @@ class GetAllPersonPhotosRequest extends Request implements Paginatable
 
     public function __construct(protected array $queryParameters = [])
     {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
+        $this->setPaginationSortKey('AbsenceID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return '/PersonPhoto';
+        return '/Absence';
     }
 
     public function defaultQuery(): array

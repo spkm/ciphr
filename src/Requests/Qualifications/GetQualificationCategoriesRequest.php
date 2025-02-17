@@ -7,7 +7,7 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllQualificationLevelsRequest extends Request implements Paginatable
+class GetQualificationCategoriesRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -20,7 +20,7 @@ class GetAllQualificationLevelsRequest extends Request implements Paginatable
 
     public function resolveEndpoint(): string
     {
-        return '/QualificationLevel';
+        return '/QualificationCategory';
     }
 
     public function defaultQuery(): array

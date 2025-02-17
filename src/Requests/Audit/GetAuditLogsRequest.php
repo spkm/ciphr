@@ -7,7 +7,7 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllAuthenticationLogsRequest extends Request implements Paginatable
+class GetAuditLogsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -20,7 +20,7 @@ class GetAllAuthenticationLogsRequest extends Request implements Paginatable
 
     public function resolveEndpoint(): string
     {
-        return '/AuthenticationLog';
+        return '/AuditLog';
     }
 
     public function defaultQuery(): array

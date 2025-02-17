@@ -1,13 +1,13 @@
 <?php
 
-namespace spkm\ciphr\Requests\Jobs;
+namespace spkm\ciphr\Requests\Absences;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllJobDetailsRequest extends Request implements Paginatable
+class GetAbsenceReasonCodesRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
@@ -15,12 +15,12 @@ class GetAllJobDetailsRequest extends Request implements Paginatable
 
     public function __construct(protected array $queryParameters = [])
     {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
+        $this->setPaginationSortKey('AbsenceReasonID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return '/JobDetail';
+        return '/AbsenceReason';
     }
 
     public function defaultQuery(): array
