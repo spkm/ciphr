@@ -9,11 +9,11 @@ class GetOrgChartDetailRequest extends Request
 {
     protected Method $method = Method::GET;
 
-    public function __construct(protected array $queryParameters = []){}
+    public function __construct(protected array $queryParameters = []) {}
 
     public function resolveEndpoint(): string
     {
-        return "/OrgChartDetail";
+        return '/OrgChartDetail';
     }
 
     public function defaultQuery(): array

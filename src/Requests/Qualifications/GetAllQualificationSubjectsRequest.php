@@ -7,19 +7,20 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllQualificationSubjectsRequest extends Request Implements Paginatable
+class GetAllQualificationSubjectsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
     protected Method $method = Method::GET;
 
-    public function __construct(protected array $queryParameters = []){
-        $this->setPaginationSortKey('ID',$this->queryParameters);
+    public function __construct(protected array $queryParameters = [])
+    {
+        $this->setPaginationSortKey('ID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return "/QualificationSubject";
+        return '/QualificationSubject';
     }
 
     public function defaultQuery(): array

@@ -9,7 +9,7 @@ class GetPersonQualificationRequest extends Request
 {
     protected Method $method = Method::GET;
 
-    public function __construct(protected int $personId,protected int $qualificationId, protected array $queryParameters = []){}
+    public function __construct(protected int $personId, protected int $qualificationId, protected array $queryParameters = []) {}
 
     public function resolveEndpoint(): string
     {

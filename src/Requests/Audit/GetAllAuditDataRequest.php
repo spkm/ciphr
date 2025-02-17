@@ -7,19 +7,20 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllAuditDataRequest extends Request Implements Paginatable
+class GetAllAuditDataRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
     protected Method $method = Method::GET;
 
-    public function __construct(protected array $queryParameters = []){
-        $this->setPaginationSortKey('ID',$this->queryParameters);
+    public function __construct(protected array $queryParameters = [])
+    {
+        $this->setPaginationSortKey('ID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return "/AuditData";
+        return '/AuditData';
     }
 
     public function defaultQuery(): array

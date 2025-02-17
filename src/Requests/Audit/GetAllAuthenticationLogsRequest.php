@@ -7,19 +7,20 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllAuthenticationLogsRequest extends Request Implements Paginatable
+class GetAllAuthenticationLogsRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
     protected Method $method = Method::GET;
 
-    public function __construct(protected array $queryParameters = []){
-        $this->setPaginationSortKey('ID',$this->queryParameters);
+    public function __construct(protected array $queryParameters = [])
+    {
+        $this->setPaginationSortKey('ID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return "/AuthenticationLog";
+        return '/AuthenticationLog';
     }
 
     public function defaultQuery(): array

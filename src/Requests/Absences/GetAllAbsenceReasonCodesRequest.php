@@ -7,19 +7,20 @@ use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 use spkm\ciphr\Traits\CiphrPaginationDefaults;
 
-class GetAllAbsenceReasonCodesRequest extends Request Implements Paginatable
+class GetAllAbsenceReasonCodesRequest extends Request implements Paginatable
 {
     use CiphrPaginationDefaults;
 
     protected Method $method = Method::GET;
 
-    public function __construct(protected array $queryParameters = []){
-        $this->setPaginationSortKey('AbsenceReasonID',$this->queryParameters);
+    public function __construct(protected array $queryParameters = [])
+    {
+        $this->setPaginationSortKey('AbsenceReasonID', $this->queryParameters);
     }
 
     public function resolveEndpoint(): string
     {
-        return "/AbsenceReason";
+        return '/AbsenceReason';
     }
 
     public function defaultQuery(): array
