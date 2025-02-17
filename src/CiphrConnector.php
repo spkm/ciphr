@@ -10,12 +10,12 @@ use Saloon\PaginationPlugin\PagedPaginator;
 
 class CiphrConnector extends Connector
 {
-    public function __construct(protected readonly string $customerPortal, public readonly string $token){}
+    public function __construct(protected readonly string $customerPortal, public readonly string $token) {}
 
     public function resolveBaseUrl(): string
-	{
-		return "https://{$this->customerPortal}.myciphr247.com/api";
-	}
+    {
+        return "https://{$this->customerPortal}.app.ciphr.com/api";
+    }
 
     protected function defaultHeaders(): array
     {
@@ -27,7 +27,7 @@ class CiphrConnector extends Connector
 
     protected function defaultAuth(): TokenAuthenticator
     {
-        return new TokenAuthenticator($this->token,'apikey');
+        return new TokenAuthenticator($this->token, 'apikey');
     }
 
     public function paginate(Request $request): PagedPaginator
@@ -35,7 +35,7 @@ class CiphrConnector extends Connector
         return new class(connector: $this, request: $request) extends PagedPaginator
         {
             protected ?int $perPageLimit = 100;
-            //Total number of records can be fetched using the count query parameter as a separate request
+            // Total number of records can be fetched using the count query parameter as a separate request
             // p (page) and l (limit) query parameters are used to paginate the results
             // s (sort) must be used with p & l to sort the results  i.e. ?s=+ID&p=1&l=100
 
@@ -51,15 +51,15 @@ class CiphrConnector extends Connector
 
             protected function applyPagination(Request $request): Request
             {
-                if($this->currentPage === 0){
-                    $this->currentPage = 1; //If 0 the API ignores pagination & returns all results.
+                if ($this->currentPage === 0) {
+                    $this->currentPage = 1; // If 0 the API ignores pagination & returns all results.
                 }
                 $request->query()->add('p', $this->currentPage);
 
                 $sortKey = $request->config()->get('paginationSortKey');
                 $request->query()->add('s', "+{$sortKey}");
 
-                if(isset($this->perPageLimit)) {
+                if (isset($this->perPageLimit)) {
                     $request->query()->add('l', $this->perPageLimit);
                 }
 
