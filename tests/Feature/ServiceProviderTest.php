@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\ServiceProvider;
 use spkm\Ciphr\CiphrConnector;
 use spkm\Ciphr\CiphrService;
+use spkm\Ciphr\CiphrServiceProvider;
 use spkm\Ciphr\Facades\Ciphr;
 use spkm\Ciphr\Tests\Fixtures\GetExamplesRequest;
 use spkm\Ciphr\Tests\Helpers\FakeCiphr;
@@ -20,14 +21,14 @@ it('loads the config with its environment names', function () {
         ->and(file_get_contents(__DIR__.'/../../config/ciphr.php'))->toContain("env('CIPHR_PORTAL')", "env('CIPHR_API_KEY')", "env('CIPHR_BASE_URL')", "env('CIPHR_RETRIES')", "env('CIPHR_CACHE', false)");
 });
 
-it('publishes the config with the install command', function () {
-    $published = config_path('ciphr.php');
-    File::delete($published);
+it('registers the install command and the config to publish', function () {
+    // Checked without publishing: writing into Testbench's shared skeleton trips the other processes of a parallel run.
+    $paths = ServiceProvider::pathsToPublish(CiphrServiceProvider::class, 'ciphr-config');
 
-    Artisan::call('ciphr:install', ['--no-interaction' => true]);
-
-    expect(File::exists($published))->toBeTrue();
-    File::delete($published);
+    expect(Artisan::all())->toHaveKey('ciphr:install')
+        ->and($paths)->toHaveCount(1)
+        ->and(realpath((string) array_key_first($paths)))->toBe(realpath(__DIR__.'/../../config/ciphr.php'))
+        ->and(array_values($paths)[0])->toBe(config_path('ciphr.php'));
 });
 
 it('builds the default connector from config the first time it is used', function () {
