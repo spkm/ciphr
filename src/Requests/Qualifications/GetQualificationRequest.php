@@ -1,23 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Qualifications;
+namespace spkm\Ciphr\Requests\Qualifications;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use spkm\Ciphr\Data\Qualification;
+use spkm\Ciphr\Requests\ItemRequest;
 
-class GetQualificationRequest extends Request
+/**
+ * One Qualification record: GET /Qualification/{id}.
+ */
+class GetQualificationRequest extends ItemRequest
 {
-    protected Method $method = Method::GET;
+    public string $resultKey = 'Qualification';
 
-    public function __construct(protected int $id, protected array $queryParameters = []) {}
+    protected ?string $dto = Qualification::class;
 
     public function resolveEndpoint(): string
     {
         return "/Qualification/{$this->id}";
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

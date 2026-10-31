@@ -1,23 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\WorkPatterns;
+namespace spkm\Ciphr\Requests\WorkPatterns;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use spkm\Ciphr\Data\WorkPattern;
+use spkm\Ciphr\Requests\ItemRequest;
 
-class GetWorkPatternRequest extends Request
+/**
+ * One WorkPattern record: GET /WorkPattern/{id}.
+ */
+class GetWorkPatternRequest extends ItemRequest
 {
-    protected Method $method = Method::GET;
+    public string $resultKey = 'WorkPattern';
 
-    public function __construct(protected int $id, protected array $queryParameters = []) {}
+    protected ?string $dto = WorkPattern::class;
 
     public function resolveEndpoint(): string
     {
         return "/WorkPattern/{$this->id}";
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

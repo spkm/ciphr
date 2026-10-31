@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Audit;
+namespace spkm\Ciphr\Requests\Audit;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\AuthenticationLog;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetAuthenticationLogsRequest extends Request implements Paginatable
+/**
+ * Every AuthenticationLog record: GET /AuthenticationLog.
+ */
+class GetAuthenticationLogsRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'AuthenticationLog';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
-    }
+    protected ?string $dto = AuthenticationLog::class;
 
     public function resolveEndpoint(): string
     {
         return '/AuthenticationLog';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

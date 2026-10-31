@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Qualifications;
+namespace spkm\Ciphr\Requests\Qualifications;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\QualificationLevel;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetQualificationLevelsRequest extends Request implements Paginatable
+/**
+ * Every QualificationLevel record: GET /QualificationLevel.
+ */
+class GetQualificationLevelsRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'QualificationLevel';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
-    }
+    protected ?string $dto = QualificationLevel::class;
 
     public function resolveEndpoint(): string
     {
         return '/QualificationLevel';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

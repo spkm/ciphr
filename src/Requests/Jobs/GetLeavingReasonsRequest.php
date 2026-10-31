@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Jobs;
+namespace spkm\Ciphr\Requests\Jobs;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\LeavingReason;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetLeavingReasonsRequest extends Request implements Paginatable
+/**
+ * Every LeavingReason record: GET /LeavingReason.
+ */
+class GetLeavingReasonsRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'LeavingReason';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('LeavingReasonID', $this->queryParameters);
-    }
+    protected ?string $dto = LeavingReason::class;
 
     public function resolveEndpoint(): string
     {
         return '/LeavingReason';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

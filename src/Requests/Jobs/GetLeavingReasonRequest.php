@@ -1,23 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Jobs;
+namespace spkm\Ciphr\Requests\Jobs;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use spkm\Ciphr\Data\LeavingReason;
+use spkm\Ciphr\Requests\ItemRequest;
 
-class GetLeavingReasonRequest extends Request
+/**
+ * One LeavingReason record: GET /LeavingReason/{id}.
+ */
+class GetLeavingReasonRequest extends ItemRequest
 {
-    protected Method $method = Method::GET;
+    public string $resultKey = 'LeavingReason';
 
-    public function __construct(protected int $id, protected array $queryParameters = []) {}
+    protected ?string $dto = LeavingReason::class;
 
     public function resolveEndpoint(): string
     {
         return "/LeavingReason/{$this->id}";
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

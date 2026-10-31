@@ -1,23 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Absences;
+namespace spkm\Ciphr\Requests\Absences;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use spkm\Ciphr\Data\AbsenceCode;
+use spkm\Ciphr\Requests\ItemRequest;
 
-class GetAbsenceCodeRequest extends Request
+/**
+ * One AbsenceCode record: GET /AbsenceCode/{id}.
+ */
+class GetAbsenceCodeRequest extends ItemRequest
 {
-    protected Method $method = Method::GET;
+    public string $resultKey = 'AbsenceCode';
 
-    public function __construct(protected int $id, protected array $queryParameters = []) {}
+    protected ?string $dto = AbsenceCode::class;
 
     public function resolveEndpoint(): string
     {
         return "/AbsenceCode/{$this->id}";
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

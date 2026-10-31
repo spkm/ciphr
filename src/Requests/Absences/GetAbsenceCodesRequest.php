@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Absences;
+namespace spkm\Ciphr\Requests\Absences;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\AbsenceCode;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetAbsenceCodesRequest extends Request implements Paginatable
+/**
+ * Every AbsenceCode record: GET /AbsenceCode.
+ */
+class GetAbsenceCodesRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'AbsenceCode';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('AbsenceID', $this->queryParameters);
-    }
+    protected ?string $dto = AbsenceCode::class;
 
     public function resolveEndpoint(): string
     {
         return '/AbsenceCode';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

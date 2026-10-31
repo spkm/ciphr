@@ -1,23 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Jobs;
+namespace spkm\Ciphr\Requests\Jobs;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use spkm\Ciphr\Data\JobDetail;
+use spkm\Ciphr\Requests\ItemRequest;
 
-class GetJobDetailRequest extends Request
+/**
+ * One JobDetail record: GET /JobDetail/{id}.
+ */
+class GetJobDetailRequest extends ItemRequest
 {
-    protected Method $method = Method::GET;
+    public string $resultKey = 'JobDetail';
 
-    public function __construct(protected int $id, protected array $queryParameters = []) {}
+    protected ?string $dto = JobDetail::class;
 
     public function resolveEndpoint(): string
     {
         return "/JobDetail/{$this->id}";
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

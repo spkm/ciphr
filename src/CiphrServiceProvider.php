@@ -1,6 +1,6 @@
 <?php
 
-namespace spkm\ciphr;
+namespace spkm\Ciphr;
 
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -12,9 +12,11 @@ class CiphrServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('ciphr')
+            ->hasConfigFile('ciphr')
             ->hasInstallCommand(function (InstallCommand $command) {
-                $command
-                    ->publishConfigFile();
+                $command->publishConfigFile();
             });
+
+        $this->app->singleton('ciphr', fn ($app) => new CiphrService);
     }
 }

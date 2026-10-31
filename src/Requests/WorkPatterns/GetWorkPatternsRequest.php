@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\WorkPatterns;
+namespace spkm\Ciphr\Requests\WorkPatterns;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\WorkPattern;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetWorkPatternsRequest extends Request implements Paginatable
+/**
+ * Every WorkPattern record: GET /WorkPattern.
+ */
+class GetWorkPatternsRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'WorkPattern';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('WorkPatternID', $this->queryParameters);
-    }
+    protected ?string $dto = WorkPattern::class;
 
     public function resolveEndpoint(): string
     {
         return '/WorkPattern';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

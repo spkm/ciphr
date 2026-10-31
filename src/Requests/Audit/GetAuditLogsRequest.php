@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Audit;
+namespace spkm\Ciphr\Requests\Audit;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\AuditLog;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetAuditLogsRequest extends Request implements Paginatable
+/**
+ * Every AuditLog record: GET /AuditLog.
+ */
+class GetAuditLogsRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'AuditLog';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
-    }
+    protected ?string $dto = AuditLog::class;
 
     public function resolveEndpoint(): string
     {
         return '/AuditLog';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }

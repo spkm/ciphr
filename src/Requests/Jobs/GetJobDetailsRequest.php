@@ -1,30 +1,21 @@
 <?php
 
-namespace spkm\ciphr\Requests\Jobs;
+namespace spkm\Ciphr\Requests\Jobs;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
-use spkm\ciphr\Traits\CiphrPaginationDefaults;
+use spkm\Ciphr\Data\JobDetail;
+use spkm\Ciphr\Requests\ListRequest;
 
-class GetJobDetailsRequest extends Request implements Paginatable
+/**
+ * Every JobDetail record: GET /JobDetail.
+ */
+class GetJobDetailsRequest extends ListRequest
 {
-    use CiphrPaginationDefaults;
+    public string $resultKey = 'JobDetail';
 
-    protected Method $method = Method::GET;
-
-    public function __construct(protected array $queryParameters = [])
-    {
-        $this->setPaginationSortKey('ID', $this->queryParameters);
-    }
+    protected ?string $dto = JobDetail::class;
 
     public function resolveEndpoint(): string
     {
         return '/JobDetail';
-    }
-
-    public function defaultQuery(): array
-    {
-        return $this->queryParameters;
     }
 }
