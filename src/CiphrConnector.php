@@ -63,13 +63,15 @@ class CiphrConnector extends Connector implements HasPagination
     }
 
     /**
+     * No Content-Type here: Ciphr's firewall blocks a GET that looks like it carries a body, so only requests with a
+     * JSON body (POST and PUT) send one, which Saloon's HasJsonBody adds.
+     *
      * @return array<string, string>
      */
     protected function defaultHeaders(): array
     {
         return [
             'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
         ];
     }
 

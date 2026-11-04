@@ -4,6 +4,7 @@ namespace spkm\Ciphr\Requests;
 
 use Illuminate\Support\Facades\Cache;
 use JsonException;
+use LogicException;
 use Psr\Http\Message\RequestInterface;
 use Saloon\CachePlugin\Contracts\Cacheable;
 use Saloon\CachePlugin\Contracts\Driver;
@@ -78,9 +79,15 @@ abstract class CiphrRequest extends Request implements Cacheable
 
     /**
      * Ciphr's flags are bare names (?count, ?first, ?GetChangesFrom): drop the "=" that building the query adds.
+     *
+     * Ciphr's firewall blocks a GET with a body, so filters must travel in the query string: refuse to send one.
      */
     public function handlePsrRequest(RequestInterface $request, PendingRequest $pendingRequest): RequestInterface
     {
+        if ($request->getMethod() === Method::GET->value && ($request->getBody()->getSize() ?? 1) > 0) {
+            throw new LogicException(class_basename($this).' would send a GET with a body, which Ciphr\'s firewall blocks: send filters as query parameters.');
+        }
+
         $query = (string) preg_replace('/(^|&)(first|last|count|GetChangesFrom)=(?=&|$)/', '$1$2', $request->getUri()->getQuery());
 
         return $request->withUri($request->getUri()->withQuery($query));

@@ -19,7 +19,7 @@ it('talks to the portal\'s API with the key as an apikey token', function () {
     expect($received->getUrl())->toBe('https://school.app.ciphr.com/api/Example')
         ->and($received->headers()->get('Authorization'))->toBe('apikey secret-key')
         ->and($received->headers()->get('Accept'))->toBe('application/json')
-        ->and($received->headers()->get('Content-Type'))->toBe('application/json');
+        ->and($received->headers()->get('Content-Type'))->toBeNull();
 });
 
 it('uses a base URL override when given one', function () {
