@@ -227,7 +227,7 @@ Run `composer install` once to enable the pre-commit hook, which runs Pint, PHPS
 
 ## Security
 
-If you discover a security issue, please email hello@spkmitchell.co.uk rather than opening an issue.
+If you discover a security issue, please don't open a public issue. [Report it privately](https://github.com/spkm/ciphr/security/advisories/new) through GitHub instead. See [SECURITY.md](SECURITY.md) for details.
 
 ## Credits
 
