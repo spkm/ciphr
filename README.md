@@ -58,9 +58,12 @@ CIPHR_API_KEY=...
 
 ```php
 $person = Ciphr::personDetails()->find(2465);           // PersonDetail or null
-$count = Ciphr::personDetails()->where('Status', 'Current')->count();
+$count = Ciphr::personDetails()->where('Status', 'Current Employee')->count();
 $titles = Ciphr::titles()->get();                        // Collection of Title
 ```
+
+`where()` matches the whole value, and text such as `Status` is set per portal, so check what yours holds first;
+`whereNull('DateLeft')` finds current staff whatever the wording.
 
 **Requests** are plain Saloon, for when you want the response itself:
 
@@ -153,7 +156,12 @@ Every record is a `readonly` class under `spkm\Ciphr\Data` whose properties carr
 `Int32` as `int`, `Decimal` as `float`, `Boolean` as `bool`, `DateTime` as `CarbonImmutable` and `String` as
 `string`, all nullable. Ciphr's empty date (`0001-01-01`) is `null`. Properties the key can't read, and anything
 Ciphr adds later, are ignored on the way in; `toArray()` and `json_encode()` give the record back in Ciphr's keys,
-leaving out what is null.
+leaving out what is null. `select()` only limits what Ciphr sends: the model still has every property, and those
+not selected are `null`. Use `toArray()` to drop them, or `Ciphr::from('/PersonDetail')` for arrays.
+
+A `PersonDetail` is one job, not one person: someone with two jobs has two records, with different `ID`s and the
+same `EmployeeNumber`. `IsPrimary` marks the main one, and the others point to it through `PrimaryPerID`, so
+dedupe on those when you want one row per person.
 
 ```php
 $person = Ciphr::personDetails()->find(2465);

@@ -95,6 +95,10 @@ Notes:
 
 - Ciphr answers a GET for an id it doesn't have with a 500 and no error list, not a 404. The package reads that as `NotFoundException`, so `find()` still returns null.
 - An entity the key doesn't expose answers "Unauthorized access to API method" as a 400; the package throws `UnauthorizedException` for it. An entity with no readable properties answers "Unable to retrieve the data" (a 400 `InvalidRequestException`).
+- Not every property on a model can be filtered on: `where('RecordStatus', …)` on `/PersonDetail` answers a 400
+  "Unrecognised property", though `RecordStatus` is on the model. The package throws `InvalidRequestException`.
+- `/PersonDetail` returns a record per job, so people with several jobs appear more than once; `IsPrimary` and
+  `PrimaryPerID` say which is the main one.
 - A portal's own custom fields (names beginning `CF`) are not on the models, as their names differ per portal. Read them with `select()` through `Ciphr::from('/PersonDetail')`, or from `Ciphr::send(...)->json()`.
 - `Training` records belong to a person through `PerID`; Ciphr's own example filters them with `?TrainingPerID=[eq]24`, so check which name your portal accepts.
 - `AbsenceDetail/{id}` takes an absence id and returns that absence's detail rows, so `absenceDetails()->find()` filters by `ID` instead.
